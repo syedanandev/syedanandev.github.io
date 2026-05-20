@@ -817,67 +817,168 @@ section {
   gap: 16px;
   margin-top: 16px;
 }
-.contact-social-link {
+.contact-socials {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  margin-top: 24px;
+}
+.contact-social-card {
   display: flex;
   align-items: center;
-  gap: 16px;
-  padding: 16px 20px;
-  background: var(--surface);
-  border: 1px solid var(--border);
-  border-radius: var(--radius);
-  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
-  font-size: 0.9rem;
-  color: var(--text2);
-  word-break: break-word;
+  justify-content: space-between;
+  padding: 20px 24px;
+  background: rgba(10, 10, 20, 0.45);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  border-radius: 18px;
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  box-shadow: 
+    0 8px 32px 0 rgba(0, 0, 0, 0.37),
+    inset 0 1px 0 0 rgba(255, 255, 255, 0.05);
+  transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  position: relative;
+  text-decoration: none;
+  overflow: hidden;
 }
-.contact-social-link:hover {
-  border-color: rgba(108, 111, 255, 0.45);
-  background: rgba(108, 111, 255, 0.08);
-  transform: translateY(-3px);
-  box-shadow: 0 10px 30px rgba(108, 111, 255, 0.12);
-  color: var(--text);
+.contact-social-card::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, rgba(108, 111, 255, 0.03) 0%, rgba(167, 139, 250, 0.03) 100%);
+  opacity: 0;
+  transition: opacity 0.4s ease;
+  z-index: 0;
 }
-.contact-social-icon {
-  width: 44px;
-  height: 44px;
+.contact-social-card:hover::before {
+  opacity: 1;
+}
+.contact-social-card:hover {
+  transform: translateY(-4px);
+  background: rgba(15, 15, 30, 0.7);
+}
+.social-card-inner {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  z-index: 1;
+}
+.social-icon-wrapper {
+  width: 48px;
+  height: 48px;
   border-radius: 12px;
-  background: linear-gradient(135deg, rgba(108, 111, 255, 0.12), rgba(167, 139, 250, 0.12));
-  border: 1px solid rgba(108, 111, 255, 0.2);
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 1.1rem;
-  color: var(--accent);
-  flex-shrink: 0;
-  transition: all 0.3s ease;
+  font-size: 1.3rem;
+  transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  z-index: 1;
 }
-.contact-social-link:hover .contact-social-icon {
-  background: linear-gradient(135deg, rgba(108, 111, 255, 0.25), rgba(167, 139, 250, 0.25));
-  border-color: rgba(108, 111, 255, 0.5);
-  transform: scale(1.05);
+
+/* Base states for icon wrappers (glowing/premium look without hover) */
+.social-icon-wrapper.mail {
+  background: rgba(108, 111, 255, 0.08);
+  border: 1px solid rgba(108, 111, 255, 0.25);
+  color: #8b8dff;
+  box-shadow: 0 0 16px rgba(108, 111, 255, 0.15);
 }
-.contact-social-details {
+.social-icon-wrapper.github {
+  background: rgba(167, 139, 250, 0.08);
+  border: 1px solid rgba(167, 139, 250, 0.25);
+  color: #c084fc;
+  box-shadow: 0 0 16px rgba(167, 139, 250, 0.15);
+}
+.social-icon-wrapper.linkedin {
+  background: rgba(56, 189, 248, 0.08);
+  border: 1px solid rgba(56, 189, 248, 0.25);
+  color: #38bdf8;
+  box-shadow: 0 0 16px rgba(56, 189, 248, 0.15);
+}
+
+/* Individual card hover actions */
+.contact-social-card.mail-card:hover {
+  border-color: rgba(108, 111, 255, 0.45);
+  box-shadow: 
+    0 16px 40px 0 rgba(108, 111, 255, 0.12),
+    0 0 0 1px rgba(108, 111, 255, 0.15) inset;
+}
+.contact-social-card.mail-card:hover .social-icon-wrapper {
+  background: rgba(108, 111, 255, 0.2);
+  border-color: rgba(108, 111, 255, 0.6);
+  color: #fff;
+  box-shadow: 0 0 24px rgba(108, 111, 255, 0.4);
+}
+
+.contact-social-card.github-card:hover {
+  border-color: rgba(167, 139, 250, 0.45);
+  box-shadow: 
+    0 16px 40px 0 rgba(167, 139, 250, 0.12),
+    0 0 0 1px rgba(167, 139, 250, 0.15) inset;
+}
+.contact-social-card.github-card:hover .social-icon-wrapper {
+  background: rgba(167, 139, 250, 0.2);
+  border-color: rgba(167, 139, 250, 0.6);
+  color: #fff;
+  box-shadow: 0 0 24px rgba(167, 139, 250, 0.4);
+}
+
+.contact-social-card.linkedin-card:hover {
+  border-color: rgba(56, 189, 248, 0.45);
+  box-shadow: 
+    0 16px 40px 0 rgba(56, 189, 248, 0.15),
+    0 0 0 1px rgba(56, 189, 248, 0.15) inset;
+}
+.contact-social-card.linkedin-card:hover .social-icon-wrapper {
+  background: rgba(56, 189, 248, 0.2);
+  border-color: rgba(56, 189, 248, 0.6);
+  color: #fff;
+  box-shadow: 0 0 24px rgba(56, 189, 248, 0.4);
+}
+
+.social-text-wrapper {
   display: flex;
   flex-direction: column;
-  gap: 2px;
-  overflow: hidden;
+  gap: 3px;
+  z-index: 1;
 }
-.contact-social-label {
+.social-platform {
+  font-family: var(--font-display);
   font-size: 0.72rem;
   color: var(--text3);
-  font-weight: 600;
-  letter-spacing: 0.08em;
+  font-weight: 700;
+  letter-spacing: 0.12em;
   text-transform: uppercase;
+  transition: color 0.3s ease;
 }
-.contact-social-value {
-  font-size: 0.9rem;
-  color: var(--text);
-  font-weight: 400;
-  transition: color 0.25s;
+.contact-social-card:hover .social-platform {
+  color: var(--text2);
 }
-.contact-social-link:hover .contact-social-value {
-  color: var(--accent2);
+.social-link-value {
+  font-family: var(--font-body);
+  font-size: 0.95rem;
+  color: var(--text2);
+  font-weight: 500;
+  transition: color 0.3s ease;
 }
+.contact-social-card:hover .social-link-value {
+  color: #fff;
+}
+.social-arrow {
+  margin-left: auto;
+  font-size: 0.85rem;
+  color: var(--text3);
+  opacity: 0.4;
+  transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  transform: translateX(0);
+  z-index: 1;
+}
+.contact-social-card:hover .social-arrow {
+  opacity: 1;
+  transform: translateX(5px);
+}
+.contact-social-card.mail-card:hover .social-arrow { color: #8b8dff; }
+.contact-social-card.github-card:hover .social-arrow { color: #c084fc; }
+.contact-social-card.linkedin-card:hover .social-arrow { color: #38bdf8; }
 
 /* Form */
 .contact-form {
@@ -1203,11 +1304,6 @@ footer {
 .contact-social-icon svg {
   transition: transform .25s, filter .25s;
 }
-.contact-social-link:hover .contact-social-icon i,
-.contact-social-link:hover .contact-social-icon svg {
-  transform: scale(1.15);
-  filter: drop-shadow(0 0 6px rgba(108,111,255,0.6));
-}
 .footer-social i,
 .footer-social svg {
   transition: transform .25s, filter .25s;
@@ -1256,8 +1352,9 @@ footer {
   .contact-form { padding: 32px 20px; gap: 20px; }
   .form-textarea { height: 140px; }
   .section-title {
-    font-size: clamp(1.8rem, 8vw, 2.5rem);
-    line-height: 1.25;
+    font-size: clamp(1.6rem, 7vw, 2.2rem);
+    line-height: 1.35;
+    letter-spacing: -0.02em;
   }
   .section-sub {
     font-size: 0.95rem;
@@ -1273,24 +1370,27 @@ footer {
     line-height: 1.6;
   }
   .contact-socials {
-    gap: 10px;
-    margin-top: 14px;
-  }
-  .contact-social-link {
-    padding: 10px 14px;
     gap: 12px;
+    margin-top: 20px;
   }
-  .contact-social-icon {
-    width: 34px;
-    height: 34px;
-    border-radius: 8px;
-    font-size: 0.95rem;
+  .contact-social-card {
+    padding: 16px 20px;
+    border-radius: 14px;
   }
-  .contact-social-label {
+  .social-icon-wrapper {
+    width: 42px;
+    height: 42px;
+    border-radius: 10px;
+    font-size: 1.15rem;
+  }
+  .social-platform {
     font-size: 0.65rem;
-    letter-spacing: 0.04em;
+    letter-spacing: 0.08em;
   }
-  .contact-social-value {
+  .social-link-value {
+    font-size: 0.85rem;
+  }
+  .social-arrow {
     font-size: 0.8rem;
   }
   footer { flex-direction: column; text-align: center; }
@@ -1319,6 +1419,30 @@ footer {
     font-size: 0.9rem;
     border-radius: 10px;
     margin-top: 4px;
+  }
+  .section-title {
+    font-size: clamp(1.45rem, 6.5vw, 1.9rem);
+    line-height: 1.35;
+    letter-spacing: -0.01em;
+  }
+  .contact-socials {
+    gap: 10px;
+  }
+  .contact-social-card {
+    padding: 14px 16px;
+    border-radius: 12px;
+  }
+  .social-icon-wrapper {
+    width: 38px;
+    height: 38px;
+    border-radius: 8px;
+    font-size: 1.05rem;
+  }
+  .social-link-value {
+    font-size: 0.8rem;
+  }
+  .social-arrow {
+    font-size: 0.75rem;
   }
 }
 @media (max-width: 400px) {
@@ -1549,26 +1673,41 @@ footer {
         <div class="contact-info-sub">Whether you're a startup, a growing business, or a recruiter — I'm always open to meaningful conversations about exciting work.</div>
       </div>
       <div class="contact-socials">
-        <a href="mailto:syedanan.dev@gmail.com" class="contact-social-link">
-          <div class="contact-social-icon"><i class="fa-regular fa-envelope"></i></div>
-          <div class="contact-social-details">
-            <div class="contact-social-label">EMAIL</div>
-            <span class="contact-social-value">syedanan.dev@gmail.com</span>
+        <a href="mailto:syedanan.dev@gmail.com" class="contact-social-card mail-card">
+          <div class="social-card-inner">
+            <div class="social-icon-wrapper mail">
+              <i class="fa-solid fa-envelope"></i>
+            </div>
+            <div class="social-text-wrapper">
+              <div class="social-platform">EMAIL</div>
+              <span class="social-link-value">syedanan.dev@gmail.com</span>
+            </div>
           </div>
+          <div class="social-arrow"><i class="fa-solid fa-arrow-right"></i></div>
         </a>
-        <a href="https://github.com/syedanandev" target="_blank" rel="noopener noreferrer" class="contact-social-link">
-          <div class="contact-social-icon"><i class="fa-brands fa-github"></i></div>
-          <div class="contact-social-details">
-            <div class="contact-social-label">GITHUB</div>
-            <span class="contact-social-value">github.com/syedanandev</span>
+        <a href="https://github.com/syedanandev" target="_blank" rel="noopener noreferrer" class="contact-social-card github-card">
+          <div class="social-card-inner">
+            <div class="social-icon-wrapper github">
+              <i class="fa-brands fa-github"></i>
+            </div>
+            <div class="social-text-wrapper">
+              <div class="social-platform">GITHUB</div>
+              <span class="social-link-value">github.com/syedanandev</span>
+            </div>
           </div>
+          <div class="social-arrow"><i class="fa-solid fa-arrow-right"></i></div>
         </a>
-        <a href="https://linkedin.com/in/syedanan" target="_blank" rel="noopener noreferrer" class="contact-social-link">
-          <div class="contact-social-icon"><i class="fa-brands fa-linkedin-in"></i></div>
-          <div class="contact-social-details">
-            <div class="contact-social-label">LINKEDIN</div>
-            <span class="contact-social-value">linkedin.com/in/syedanan</span>
+        <a href="https://linkedin.com/in/syedanan" target="_blank" rel="noopener noreferrer" class="contact-social-card linkedin-card">
+          <div class="social-card-inner">
+            <div class="social-icon-wrapper linkedin">
+              <i class="fa-brands fa-linkedin-in"></i>
+            </div>
+            <div class="social-text-wrapper">
+              <div class="social-platform">LINKEDIN</div>
+              <span class="social-link-value">linkedin.com/in/syedanan</span>
+            </div>
           </div>
+          <div class="social-arrow"><i class="fa-solid fa-arrow-right"></i></div>
         </a>
       </div>
     </div>
