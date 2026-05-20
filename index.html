@@ -9,6 +9,7 @@
 <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&display=swap" rel="stylesheet" />
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 <style>
 /* ============================================================
    DESIGN TOKENS
@@ -47,40 +48,12 @@ body {
   font-weight: 300;
   line-height: 1.7;
   overflow-x: hidden;
-  cursor: none;
 }
 a { color: inherit; text-decoration: none; }
 img { display: block; max-width: 100%; }
-button { cursor: none; border: none; background: none; font: inherit; color: inherit; }
+button { border: none; background: none; font: inherit; color: inherit; }
 
-/* ============================================================
-   CUSTOM CURSOR
-   ============================================================ */
-#cursor {
-  position: fixed;
-  top: 0; left: 0;
-  width: 12px; height: 12px;
-  background: var(--accent);
-  border-radius: 50%;
-  pointer-events: none;
-  z-index: 9999;
-  transform: translate(-50%, -50%);
-  transition: width .2s, height .2s, background .2s, opacity .2s;
-  mix-blend-mode: screen;
-}
-#cursor-ring {
-  position: fixed;
-  top: 0; left: 0;
-  width: 40px; height: 40px;
-  border: 1px solid rgba(108,111,255,0.5);
-  border-radius: 50%;
-  pointer-events: none;
-  z-index: 9998;
-  transform: translate(-50%, -50%);
-  transition: width .35s ease, height .35s ease, border-color .35s;
-}
-body:has(a:hover) #cursor, body:has(button:hover) #cursor { width: 20px; height: 20px; background: var(--accent2); }
-body:has(a:hover) #cursor-ring, body:has(button:hover) #cursor-ring { width: 60px; height: 60px; border-color: rgba(167,139,250,0.6); }
+
 
 /* ============================================================
    SCROLL PROGRESS
@@ -812,11 +785,11 @@ section {
 /* ============================================================
    CONTACT
    ============================================================ */
-#contact { max-width: 1000px; margin: 0 auto; }
+#contact { max-width: 1200px; margin: 0 auto; }
 .contact-inner {
   margin-top: 60px;
   display: grid;
-  grid-template-columns: 1fr 1.6fr;
+  grid-template-columns: 1fr 2fr;
   gap: 60px;
   align-items: start;
 }
@@ -875,8 +848,8 @@ section {
 .contact-form {
   display: flex;
   flex-direction: column;
-  gap: 20px;
-  padding: 40px;
+  gap: 28px;
+  padding: 52px 48px;
   background: var(--surface);
   border: 1px solid var(--border);
   border-radius: var(--radius2);
@@ -885,67 +858,79 @@ section {
 .form-group {
   position: relative;
 }
-.form-label {
-  display: block;
-  font-size: 0.78rem;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-  color: var(--text2);
-  margin-bottom: 10px;
-  font-weight: 500;
-  transition: color .25s;
-}
 .form-group:focus-within .form-label { color: var(--accent2); }
 .form-input, .form-textarea {
   width: 100%;
   background: rgba(255,255,255,0.04);
   border: 1px solid var(--border);
-  border-radius: 12px;
-  padding: 14px 18px;
+  border-radius: 14px;
+  padding: 18px 22px;
   font-family: var(--font-body);
-  font-size: 0.9rem;
+  font-size: 0.95rem;
   color: var(--text);
   outline: none;
-  transition: border-color .25s, box-shadow .25s, background .25s;
+  transition: border-color .3s, box-shadow .3s, background .3s;
   -webkit-appearance: none;
 }
-.form-input::placeholder, .form-textarea::placeholder { color: var(--text3); }
+.form-input::placeholder, .form-textarea::placeholder { color: rgba(136,136,170,0.55); }
 .form-input:focus, .form-textarea:focus {
   border-color: rgba(108,111,255,0.6);
-  box-shadow: 0 0 0 3px rgba(108,111,255,0.1);
-  background: rgba(108,111,255,0.06);
+  box-shadow: 0 0 0 4px rgba(108,111,255,0.1);
+  background: rgba(108,111,255,0.05);
 }
 .form-textarea {
-  resize: vertical;
-  min-height: 140px;
-  line-height: 1.7;
+  resize: none;
+  height: 160px;
+  max-height: 160px;
+  overflow-y: auto;
+  line-height: 1.8;
 }
-.form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+.form-row { display: grid; grid-template-columns: 1fr 1.7fr; gap: 16px; }
+
+/* Premium submit button */
 .btn-submit {
+  position: relative;
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 10px;
-  padding: 15px 32px;
-  background: linear-gradient(135deg, var(--accent), var(--accent2));
-  border-radius: 12px;
-  font-size: 0.9rem;
-  font-weight: 500;
-  color: #fff;
-  transition: transform .25s, box-shadow .25s, opacity .25s;
-  box-shadow: 0 4px 32px var(--glow);
+  gap: 0;
+  padding: 20px 40px;
+  background: linear-gradient(135deg, #1a1a3e 0%, #2d2060 40%, #4c1d95 100%);
+  border-radius: 14px;
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: rgba(255,255,255,0.95);
+  letter-spacing: 0.08em;
   width: 100%;
-  letter-spacing: 0.03em;
+  overflow: hidden;
+  transition: transform .3s cubic-bezier(.16,1,.3,1), box-shadow .3s, background .3s;
+  box-shadow: 0 4px 28px rgba(76,29,149,0.45), 0 1px 0 rgba(255,255,255,0.08) inset;
+  margin-top: 8px;
+  border: 1px solid rgba(167,139,250,0.2);
 }
+.btn-submit::before {
+  content: '';
+  position: absolute;
+  top: 0; left: -100%;
+  width: 60%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.14), transparent);
+  transform: skewX(-20deg);
+  transition: left .6s ease;
+}
+.btn-submit:hover::before { left: 160%; }
 .btn-submit:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 8px 48px var(--glow);
+  transform: translateY(-3px);
+  background: linear-gradient(135deg, #1e1e4a 0%, #352570 40%, #5b21b6 100%);
+  box-shadow: 0 14px 48px rgba(76,29,149,0.55), 0 1px 0 rgba(255,255,255,0.12) inset;
+  border-color: rgba(167,139,250,0.35);
 }
-.btn-submit:active { transform: translateY(0); }
+.btn-submit:active { transform: translateY(-1px); }
 .btn-submit:disabled {
-  opacity: 0.7;
+  opacity: 0.55;
   cursor: not-allowed;
   transform: none;
+  box-shadow: none;
 }
 
 /* Form notifications */
@@ -1090,42 +1075,111 @@ footer {
 .reveal-right.in-view { opacity: 1; transform: translateX(0); }
 
 /* ============================================================
-   MOBILE MENU
+   MOBILE MENU — Floating Glassmorphism Dropdown
    ============================================================ */
-.mobile-menu {
-  display: none;
+.mobile-overlay {
   position: fixed;
-  top: 0; left: 0; right: 0; bottom: 0;
-  background: rgba(5,5,7,0.97);
-  backdrop-filter: blur(20px);
+  inset: 0;
+  background: rgba(0,0,0,0.25);
+  z-index: 899;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity .3s ease, visibility .3s;
+  backdrop-filter: blur(2px);
+  -webkit-backdrop-filter: blur(2px);
+}
+.mobile-overlay.open { opacity: 1; visibility: visible; }
+.mobile-menu {
+  position: fixed;
+  top: 74px;
+  left: 5%; right: 5%;
+  background: rgba(8,8,16,0.88);
+  backdrop-filter: blur(32px);
+  -webkit-backdrop-filter: blur(32px);
+  border: 1px solid rgba(255,255,255,0.1);
+  border-radius: 20px;
   z-index: 900;
+  padding: 8px;
+  display: flex;
   flex-direction: column;
+  gap: 2px;
+  box-shadow: 0 24px 64px rgba(0,0,0,0.55), 0 0 0 1px rgba(255,255,255,0.04) inset;
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(-10px) scale(0.98);
+  transition: opacity .3s ease, transform .35s cubic-bezier(.16,1,.3,1), visibility .3s;
+  pointer-events: none;
+}
+.mobile-menu.open {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0) scale(1);
+  pointer-events: all;
+}
+.mobile-menu-header {
+  display: flex;
   align-items: center;
-  justify-content: center;
-  gap: 36px;
+  justify-content: space-between;
+  padding: 12px 16px 10px;
+  border-bottom: 1px solid rgba(255,255,255,0.07);
+  margin-bottom: 6px;
 }
-.mobile-menu.open { display: flex; }
-.mobile-menu a {
+.mobile-menu-brand {
   font-family: var(--font-display);
-  font-size: 2rem;
-  font-weight: 700;
-  letter-spacing: -0.04em;
-  color: var(--text2);
-  transition: color .25s;
+  font-weight: 800;
+  font-size: 1rem;
+  letter-spacing: -0.03em;
+  background: linear-gradient(135deg, var(--text), var(--accent2));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
 }
-.mobile-menu a:hover { color: var(--text); }
-.mobile-close {
-  position: absolute;
-  top: 24px; right: 5%;
-  font-size: 1.5rem;
+.mobile-menu a {
+  font-family: var(--font-body);
+  font-size: 0.95rem;
+  font-weight: 500;
   color: var(--text2);
-  background: var(--surface);
-  border: 1px solid var(--border);
-  width: 44px; height: 44px;
-  border-radius: 10px;
+  padding: 13px 18px;
+  border-radius: 12px;
+  letter-spacing: 0.01em;
+  transition: color .2s, background .2s;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.mobile-menu a:hover { color: var(--text); background: rgba(255,255,255,0.06); }
+.mobile-close {
+  font-size: 0.85rem;
+  color: var(--text2);
+  background: rgba(255,255,255,0.08);
+  border: 1px solid rgba(255,255,255,0.1);
+  width: 30px; height: 30px;
+  border-radius: 8px;
   display: flex;
   align-items: center;
   justify-content: center;
+  transition: background .2s, color .2s;
+  flex-shrink: 0;
+}
+.mobile-close:hover { background: rgba(255,255,255,0.14); color: var(--text); }
+
+/* Social icon enhancements */
+.contact-social-icon i,
+.contact-social-icon svg {
+  transition: transform .25s, filter .25s;
+}
+.contact-social-link:hover .contact-social-icon i,
+.contact-social-link:hover .contact-social-icon svg {
+  transform: scale(1.15);
+  filter: drop-shadow(0 0 6px rgba(108,111,255,0.6));
+}
+.footer-social i,
+.footer-social svg {
+  transition: transform .25s, filter .25s;
+}
+.footer-social:hover i,
+.footer-social:hover svg {
+  transform: scale(1.15);
+  filter: drop-shadow(0 0 8px rgba(167,139,250,0.7));
 }
 
 /* ============================================================
@@ -1151,7 +1205,7 @@ footer {
 @media (max-width: 600px) {
   .form-row { grid-template-columns: 1fr; }
   .stats-grid { grid-template-columns: 1fr 1fr; }
-  .contact-form { padding: 28px 22px; }
+  .contact-form { padding: 32px 24px; gap: 22px; }
   footer { flex-direction: column; text-align: center; }
   .footer-socials { justify-content: center; }
   .hero-name { font-size: clamp(2rem, 8vw, 3rem); white-space: normal; word-break: break-word; }
@@ -1173,9 +1227,6 @@ footer {
 <!-- Scroll progress -->
 <div id="scroll-bar"></div>
 
-<!-- Custom cursor -->
-<div id="cursor"></div>
-<div id="cursor-ring"></div>
 
 <!-- Canvas background -->
 <canvas id="bg-canvas"></canvas>
@@ -1184,12 +1235,17 @@ footer {
 <!-- Back to top -->
 <button id="back-top" onclick="window.scrollTo({top:0,behavior:'smooth'})" aria-label="Back to top">↑</button>
 
+<!-- Mobile overlay -->
+<div class="mobile-overlay" id="mobile-overlay" onclick="closeMobileMenu()"></div>
+
 <!-- Mobile menu -->
 <div class="mobile-menu" id="mobile-menu">
-  <button class="mobile-close" id="mobile-close">✕</button>
-  <a href="#about" onclick="closeMobileMenu()">About</a>
+  <div class="mobile-menu-header">
+    <span class="mobile-menu-brand">SNA</span>
+    <button class="mobile-close" id="mobile-close" aria-label="Close menu">✕</button>
+  </div>
+  <a href="#about" onclick="closeMobileMenu()">About Me</a>
   <a href="#skills" onclick="closeMobileMenu()">Skills</a>
-  <a href="#projects" onclick="closeMobileMenu()">Projects</a>
   <a href="#services" onclick="closeMobileMenu()">Services</a>
   <a href="#contact" onclick="closeMobileMenu()">Contact</a>
 </div>
@@ -1198,9 +1254,8 @@ footer {
 <nav id="navbar">
   <a class="nav-logo" href="#">SNA</a>
   <ul class="nav-links">
-    <li><a href="#about">About</a></li>
+    <li><a href="#about">About Me</a></li>
     <li><a href="#skills">Skills</a></li>
-    <li><a href="#projects">Projects</a></li>
     <li><a href="#services">Services</a></li>
     <li><a href="#contact">Contact</a></li>
   </ul>
@@ -1227,7 +1282,7 @@ footer {
       I design and build modern digital products — from scalable web apps and mobile solutions to automation systems that help businesses run smarter.
     </p>
     <div class="hero-actions reveal">
-      <a href="#projects" class="btn-primary"><span>View Projects</span><span>→</span></a>
+      <a href="#services" class="btn-primary"><span>View Services</span><span>→</span></a>
       <a href="#contact" class="btn-ghost">Contact Me</a>
     </div>
   </div>
@@ -1324,99 +1379,11 @@ footer {
         <div class="skill-item"><div class="skill-item-top"><span>MongoDB</span><span>72%</span></div><div class="skill-bar-wrap"><div class="skill-bar" data-width="72"></div></div></div>
       </div>
     </div>
-    <div class="skill-cat reveal">
-      <div class="skill-cat-icon">🛠️</div>
-      <div class="skill-cat-name">Tools</div>
-      <div class="skill-items">
-        <div class="skill-item"><div class="skill-item-top"><span>Git / GitHub</span><span>88%</span></div><div class="skill-bar-wrap"><div class="skill-bar" data-width="88"></div></div></div>
-        <div class="skill-item"><div class="skill-item-top"><span>Figma</span><span>75%</span></div><div class="skill-bar-wrap"><div class="skill-bar" data-width="75"></div></div></div>
-        <div class="skill-item"><div class="skill-item-top"><span>VS Code</span><span>95%</span></div><div class="skill-bar-wrap"><div class="skill-bar" data-width="95"></div></div></div>
-      </div>
-    </div>
   </div>
 </section>
 
 <div class="divider"></div>
 
-<!-- PROJECTS -->
-<section id="projects">
-  <div class="section-label reveal">Work</div>
-  <h2 class="section-title reveal">Selected Projects</h2>
-  <p class="section-sub reveal">Real-world products built with care, precision, and modern engineering.</p>
-  <div class="projects-grid">
-
-    <div class="project-card reveal">
-      <div class="project-img"><div class="project-img-inner">⚖️</div><div class="project-img-overlay"></div></div>
-      <div class="project-body">
-        <div class="project-title">Case Management App</div>
-        <div class="project-desc">A comprehensive legal case management system with client tracking, document storage, and real-time status updates.</div>
-        <div class="project-stack">
-          <span class="stack-pill">Flutter</span>
-          <span class="stack-pill">Firebase</span>
-          <span class="stack-pill">SQLite</span>
-        </div>
-        <div class="project-links">
-          <a href="#" class="project-btn project-btn-primary">Live Demo</a>
-          <a href="#" class="project-btn project-btn-ghost">GitHub</a>
-        </div>
-      </div>
-    </div>
-
-    <div class="project-card reveal">
-      <div class="project-img"><div class="project-img-inner" style="background:linear-gradient(135deg,#0f1523,#1a0e2e)">📊</div><div class="project-img-overlay"></div></div>
-      <div class="project-body">
-        <div class="project-title">Business Automation Dashboard</div>
-        <div class="project-desc">An intelligent dashboard for automating business workflows, reporting, and analytics with real-time data sync.</div>
-        <div class="project-stack">
-          <span class="stack-pill">React</span>
-          <span class="stack-pill">Node.js</span>
-          <span class="stack-pill">Firebase</span>
-        </div>
-        <div class="project-links">
-          <a href="#" class="project-btn project-btn-primary">Live Demo</a>
-          <a href="#" class="project-btn project-btn-ghost">GitHub</a>
-        </div>
-      </div>
-    </div>
-
-    <div class="project-card reveal">
-      <div class="project-img"><div class="project-img-inner" style="background:linear-gradient(135deg,#0a1a0f,#0f2318)">📋</div><div class="project-img-overlay"></div></div>
-      <div class="project-body">
-        <div class="project-title">Offline-first Productivity App</div>
-        <div class="project-desc">A cross-platform productivity suite designed to work seamlessly offline with background sync when connectivity returns.</div>
-        <div class="project-stack">
-          <span class="stack-pill">Flutter</span>
-          <span class="stack-pill">SQLite</span>
-          <span class="stack-pill">Dart</span>
-        </div>
-        <div class="project-links">
-          <a href="#" class="project-btn project-btn-primary">Live Demo</a>
-          <a href="#" class="project-btn project-btn-ghost">GitHub</a>
-        </div>
-      </div>
-    </div>
-
-    <div class="project-card reveal">
-      <div class="project-img"><div class="project-img-inner" style="background:linear-gradient(135deg,#0f0820,#1a0f28)">🌐</div><div class="project-img-overlay"></div></div>
-      <div class="project-body">
-        <div class="project-title">Modern Portfolio Website</div>
-        <div class="project-desc">A premium interactive portfolio built with cutting-edge web technologies, smooth animations, and top-tier design aesthetics.</div>
-        <div class="project-stack">
-          <span class="stack-pill">HTML</span>
-          <span class="stack-pill">CSS</span>
-          <span class="stack-pill">JavaScript</span>
-        </div>
-        <div class="project-links">
-          <a href="#" class="project-btn project-btn-primary">Live Demo</a>
-          <a href="#" class="project-btn project-btn-ghost">GitHub</a>
-        </div>
-      </div>
-    </div>
-
-  </div>
-</section>
-
-<div class="divider"></div>
 
 <!-- SERVICES -->
 <section id="services">
@@ -1472,25 +1439,21 @@ footer {
       </div>
       <div class="contact-socials">
         <a href="mailto:syedanan.dev@gmail.com" class="contact-social-link">
-          <div class="contact-social-icon">📧</div>
+          <div class="contact-social-icon"><i class="fa-regular fa-envelope" style="font-size:1.1rem"></i></div>
           <div>
             <div style="font-size:0.78rem;color:var(--text3);margin-bottom:2px;letter-spacing:0.05em">EMAIL</div>
             syedanan.dev@gmail.com
           </div>
         </a>
-        <a href="https://github.com/" target="_blank" class="contact-social-link">
-          <div class="contact-social-icon">
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"/></svg>
-          </div>
+        <a href="https://github.com/syedanandev" target="_blank" rel="noopener noreferrer" class="contact-social-link">
+          <div class="contact-social-icon"><i class="fa-brands fa-github" style="font-size:1.15rem"></i></div>
           <div>
             <div style="font-size:0.78rem;color:var(--text3);margin-bottom:2px;letter-spacing:0.05em">GITHUB</div>
-            github.com/syedanan
+            github.com/syedanandev
           </div>
         </a>
         <a href="https://linkedin.com/" target="_blank" class="contact-social-link">
-          <div class="contact-social-icon">
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
-          </div>
+          <div class="contact-social-icon"><i class="fa-brands fa-linkedin-in" style="font-size:1.1rem"></i></div>
           <div>
             <div style="font-size:0.78rem;color:var(--text3);margin-bottom:2px;letter-spacing:0.05em">LINKEDIN</div>
             linkedin.com/in/syedanan
@@ -1509,25 +1472,20 @@ footer {
       </div>
       <div class="form-row">
         <div class="form-group">
-          <label class="form-label" for="contact-name">Full Name</label>
-          <input type="text" id="contact-name" class="form-input" placeholder="John Doe" autocomplete="name" />
+          <input type="text" id="contact-name" class="form-input" placeholder="Full Name" autocomplete="name" />
         </div>
         <div class="form-group">
-          <label class="form-label" for="contact-email">Email Address</label>
-          <input type="email" id="contact-email" class="form-input" placeholder="john@example.com" autocomplete="email" />
+          <input type="email" id="contact-email" class="form-input" placeholder="Email Address" autocomplete="email" />
         </div>
       </div>
       <div class="form-group">
-        <label class="form-label" for="contact-subject">Subject</label>
-        <input type="text" id="contact-subject" class="form-input" placeholder="Project inquiry..." />
+        <input type="text" id="contact-subject" class="form-input" placeholder="Subject" />
       </div>
       <div class="form-group">
-        <label class="form-label" for="contact-message">Message</label>
-        <textarea id="contact-message" class="form-textarea" placeholder="Tell me about your project..."></textarea>
+        <textarea id="contact-message" class="form-textarea" placeholder="Message"></textarea>
       </div>
       <button type="submit" class="btn-submit" id="submit-btn">
         <span id="submit-btn-text">Send Message</span>
-        <span id="submit-btn-icon">→</span>
       </button>
     </form>
   </div>
@@ -1541,13 +1499,9 @@ footer {
   </div>
   <div class="footer-center">© 2025 Syed Nadiruzzaman Anan. All rights reserved.</div>
   <div class="footer-socials">
-    <a href="mailto:syedanan.dev@gmail.com" class="footer-social" title="Email">📧</a>
-    <a href="https://github.com/" target="_blank" class="footer-social" title="GitHub">
-      <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"/></svg>
-    </a>
-    <a href="https://linkedin.com/" target="_blank" class="footer-social" title="LinkedIn">
-      <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
-    </a>
+    <a href="mailto:syedanan.dev@gmail.com" class="footer-social" title="Email"><i class="fa-regular fa-envelope"></i></a>
+    <a href="https://github.com/syedanandev" target="_blank" rel="noopener noreferrer" class="footer-social" title="GitHub"><i class="fa-brands fa-github"></i></a>
+    <a href="https://linkedin.com/" target="_blank" class="footer-social" title="LinkedIn"><i class="fa-brands fa-linkedin-in"></i></a>
   </div>
 </footer>
 
@@ -1634,21 +1588,6 @@ function animateParticles() {
 }
 animateParticles();
 
-/* ============================================================
-   CUSTOM CURSOR
-   ============================================================ */
-const cursor = document.getElementById('cursor');
-const cursorRing = document.getElementById('cursor-ring');
-let mx = 0, my = 0, rx = 0, ry = 0;
-document.addEventListener('mousemove', e => { mx = e.clientX; my = e.clientY; cursor.style.left = mx+'px'; cursor.style.top = my+'px'; });
-function animateCursor() {
-  rx += (mx - rx) * 0.12; ry += (my - ry) * 0.12;
-  cursorRing.style.left = rx+'px'; cursorRing.style.top = ry+'px';
-  requestAnimationFrame(animateCursor);
-}
-animateCursor();
-document.addEventListener('mouseleave', () => { cursor.style.opacity='0'; cursorRing.style.opacity='0'; });
-document.addEventListener('mouseenter', () => { cursor.style.opacity='1'; cursorRing.style.opacity='1'; });
 
 /* ============================================================
    SCROLL PROGRESS
@@ -1778,10 +1717,12 @@ document.querySelectorAll('.project-card').forEach(card => {
    ============================================================ */
 document.getElementById('hamburger').addEventListener('click', () => {
   document.getElementById('mobile-menu').classList.add('open');
+  document.getElementById('mobile-overlay').classList.add('open');
 });
 document.getElementById('mobile-close').addEventListener('click', closeMobileMenu);
 function closeMobileMenu() {
   document.getElementById('mobile-menu').classList.remove('open');
+  document.getElementById('mobile-overlay').classList.remove('open');
 }
 
 /* ============================================================
@@ -1806,15 +1747,8 @@ function showFormNotification(type, message) {
 function setSubmitState(loading) {
   const btn      = document.getElementById('submit-btn');
   const btnText  = document.getElementById('submit-btn-text');
-  const btnIcon  = document.getElementById('submit-btn-icon');
   btn.disabled   = loading;
-  if (loading) {
-    btnText.textContent = 'Sending…';
-    btnIcon.textContent = '⏳';
-  } else {
-    btnText.textContent = 'Send Message';
-    btnIcon.textContent = '→';
-  }
+  btnText.textContent = loading ? 'Sending…' : 'Send Message';
 }
 
 async function handleFormSubmit(e) {
